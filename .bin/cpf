@@ -1,0 +1,18 @@
+#!/bin/bash
+# Copyleft 2015 - Leonardo Kewitz github.com/kewitz
+# intel_pstate max cpu-frequency script.
+
+PMAX=/sys/devices/system/cpu/intel_pstate/max_perf_pct
+CPUINFO=/proc/cpuinfo
+
+if [ "$#" != "1" ]
+then
+	echo -e "Usage: cpf 30-100"
+else
+	sudo tee $PMAX <<<$1
+fi
+
+# Print current status...
+PCT=$(<$PMAX)
+MHZ=$(egrep -m 1 -o 'MHz.+\: (([[:digit:]]|\.)+$)' /proc/cpuinfo | egrep -o '([[:digit:]]|\.)+')
+echo -e "Max performance currently at $PCT %. Actual clock $MHZ MHz"

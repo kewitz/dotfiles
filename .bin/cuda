@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if [ "$#" != "1" ]; then
+	echo -e "Usage: cuda [on|off]"
+	exit 1
+fi
+
+if [ "$1" == "on" -o "$1" == "ON" ]; then
+	sudo tee /proc/acpi/bbswitch <<<ON
+	sleep 1
+	sudo modprobe nvidia_340_updates_uvm
+fi
+
+if [ "$1" == "off" -o "$1" == "OFF" ]; then
+	sudo rmmod nvidia_uvm
+	sleep 1
+	sudo rmmod nvidia
+	sleep 1
+	sudo tee /proc/acpi/bbswitch <<<OFF
+fi
+
+cat /proc/acpi/bbswitch

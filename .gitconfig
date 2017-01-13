@@ -1,0 +1,11 @@
+[user]
+	name = Leonardo Kewitz
+	email = leokewitz@gmail.com
+[alias]
+	l = log --graph --pretty=format:\"%C(bold)%h%Creset%C(cyan)%d%Creset %s %C(dim) @%aN %cr\" --abbrev-commit --decorate
+	lo = log --graph --pretty=format:\"%C(bold)%h%Creset%C(cyan)%d%Creset %s %C(dim) @%aN %cr\n\" --abbrev-commit --decorate --stat
+	standup = log --graph --pretty=format:\"%C(bold)%h%Creset%C(cyan)%d%Creset %s %C(dim) @%aN %cr\" --abbrev-commit --date=local --author='leo' --all --since='yesterday'
+	master = checkout master
+	amend = commit --amend --no-edit
+[core]
+	editor = vim

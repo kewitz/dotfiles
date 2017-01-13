@@ -1,0 +1,17 @@
+#!/bin/bash
+# Copyleft 2015 - Leonardo Kewitz github.com/kewitz
+# intel_backlight script.
+
+BRIGHT=/sys/class/backlight/intel_backlight/brightness
+MAX=$(($(</sys/class/backlight/intel_backlight/max_brightness)+0))
+
+if [ "$#" != "1" ]
+then
+	echo -e "Usage: bright 0-$MAX"
+else
+	sudo tee $BRIGHT<<<$1
+fi
+
+# Print current status...
+CUR=$(($(<$BRIGHT)+0))
+echo -e "Brightness currently at $CUR/$MAX."
